@@ -11,10 +11,11 @@ if len(sys.argv) <= 1:
     print("Usage: convert.py xmlfile")
     exit(2)
 xml_file = sys.argv[1]
+xlsx_file = xml_file.replace(".xml", ".xlsx")
 
 # Open XML document using minidom parser
 #  DOMTree = xml.dom.minidom.parse("/home/david/test.xml")
-DOMTree = xml.dom.minidom.parse("test.xml")
+DOMTree = xml.dom.minidom.parse(xml_file)
 collection = DOMTree.documentElement
 if collection.hasAttribute("testsuite"):
     print("Root element : %s" % collection.getAttribute("testsuite"))
@@ -108,4 +109,4 @@ for test in tests:
             print(attr('reset'))
             row += 1
     count += 1
-workbook.save(filename="./test.xlsx")
+workbook.save(filename=xlsx_file)
